@@ -5,6 +5,7 @@ public class Tuple {
 	public int index;
 	public String product;
 	public int[] properties = new int[6];
+    public double score;
 	
 	
 	/**
@@ -28,6 +29,7 @@ public class Tuple {
 	 */
 	public Tuple(  int x, int y,String prod){
 	
+
 		index=++indexCount;
 		properties[0] = x;
 		properties[1] = y;
@@ -52,6 +54,11 @@ public class Tuple {
 			properties[i] = props[i];
 		}
 	}
+
+    public void setScore(double d)
+    {
+        score = d;
+    }
 	
 	public void print()
 	{
@@ -62,6 +69,7 @@ public class Tuple {
 		{
 			System.out.print(properties[i] +"\t");
 		}
+        System.out.print(score);
 		System.out.println();
 		
 	}

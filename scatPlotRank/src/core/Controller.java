@@ -15,8 +15,8 @@ public class Controller {
     	// Load data and gets datastore
     	dataStore = new DataStore();
 //    	dataLoader = new DataLoader(dataStore, 1); // load by Hard-coding
-    	dataLoader = new DataLoader(dataStore, 1); //load by random test data
-    	
+    	dataLoader = new DataLoader(dataStore, 2); //load by random test data
+    	CategoryPointsCount c = new CategoryPointsCount(dataStore);
         // Index
     	xIndex = new ScatterPlotIndex(dataStore, 0);
     	yIndex = new ScatterPlotIndex(dataStore, 1);    	 
@@ -31,7 +31,7 @@ public class Controller {
     	ScatterPlotRank scatterPlotRank = new ScatterPlotRank(xIndex, yIndex, userInput, dataStore);
     	
     	// Call logic function in scatterPlotRank
-    	scatterPlotRank.ranking(true);
+    	scatterPlotRank.ranking(false);
     	
 		// Print Results.
     	scatterPlotRank.printRanking();

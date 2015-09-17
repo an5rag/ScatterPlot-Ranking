@@ -1,10 +1,6 @@
 package core;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import database.DataStore;
 import database.ListElement;
@@ -16,7 +12,7 @@ public class ScatterPlotRank {
 	public  ScatterPlotIndex xList;
 	public  ScatterPlotIndex yList;
 	public  Rectangle[] rectangles = new Rectangle[2];
-	HashMap<String, Integer> hm = new HashMap<String, Integer>();//will be used to map product-count pairs
+	HashMap<String, Double> hm = new HashMap<String, Double>();//will be used to map product-count pairs
 	
 
 	//constructor
@@ -136,14 +132,15 @@ public class ScatterPlotRank {
 		 for(int i=0; i<list.size(); i++)
 		 {			
 			 		String key = list.get(i).t.product;
-			 		Integer value = hm.get(key);
+			 		double score = list.get(i).t.score;
+			 		Double value = hm.get(key);
 		 			if (value != null) 
 		 			{
-		 				hm.put(key, new Integer(value + 1));
+		 				hm.put(key, new Double(value + score));
 		 				
 		 			} else 
 		 			{
-		 				hm.put(key, new Integer(1));			    
+		 				hm.put(key, new Double(score));
 		 			}
 			 
 		 }
@@ -155,16 +152,26 @@ public class ScatterPlotRank {
 	 */
 	public void printRanking()
 	{
-		  // Get a set of the entries
-	      Set set = hm.entrySet();
-	      // Get an iterator
-	      Iterator i = set.iterator();
-	      // Display elements
-	      while(i.hasNext()) {
-	         Map.Entry me = (Map.Entry)i.next();
-	         System.out.print(me.getKey() + ": ");
-	         System.out.println(me.getValue());
-	      }
+//		  // Get a set of the entries
+//	      Set set = hm.entrySet();
+//	      // Get an iterator
+//	      Iterator i = set.iterator();
+//	      // Display elements
+//	      while(i.hasNext()) {
+//	         Map.Entry me = (Map.Entry)i.next();
+//	         System.out.print(me.getKey() + ": ");
+//	         System.out.println(me.getValue());
+//	      }
+		TreeMap<String, Double> tree = new TreeMap<String, Double>();
+		tree.putAll(hm);
+//		System.out.println(tree.toString());
+//		System.out.println("Printing Products:");
+		for (Map.Entry<String, Double> entry : tree.entrySet()) {
+			String key = entry.getKey();
+			Double value = entry.getValue();
+
+			System.out.printf("%s : %s\n", key, value);
+		}
 	}
 	
 	
